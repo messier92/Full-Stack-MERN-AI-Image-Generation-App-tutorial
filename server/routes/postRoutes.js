@@ -42,10 +42,10 @@ router.route('/').post(async(req, res) => {
 router.route('/').delete(async(req, res) => {
     try {
         const { _id, photo} = req.body;
-        console.log(photo); // returns http://res.cloudinary.com/drpy5jqfi/image/upload/v1675092312/ebszbw35dao0lmjckpou.png, do regex to get only the last part after png 
-        
-        await cloudinary.uploader.destroy(photo);
-        //cloudinary.uploader.destroy('pgwubp0e150ybridw462')
+        const photoNametoDelete = photo.slice(61, -4);
+        // Delete on Cloudinary
+        await cloudinary.uploader.destroy(photoNametoDelete);
+        // Delete on MongoDB Atlas
         const deletePost = await Post.deleteOne({
             _id
         })

@@ -41,7 +41,7 @@ const CreatePost = () => {
         const data = await response.json();
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (err) {
-        alert(err);
+        alert(err + '...CHECK OPENAI SECRET KEY');
       } finally {
         setGeneratingImg(false);
       }
